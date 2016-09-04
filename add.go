@@ -29,8 +29,7 @@ func addCommand(args ...string) int {
 			return handleError(rerr)
 		}
 
-		aerr := safe.Add(name, username, password)
-		if aerr != nil {
+		if aerr := safe.Add(name, username, password); aerr != nil {
 			return handleError(aerr)
 		}
 	} else if err != nil {

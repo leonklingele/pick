@@ -5,8 +5,7 @@ import (
 )
 
 func (s *Safe) Remove(name string) error {
-	_, exists := s.Accounts[name]
-	if !exists {
+	if _, exists := s.Accounts[name]; !exists {
 		return fmt.Errorf("Account not found")
 	}
 
