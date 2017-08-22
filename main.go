@@ -8,8 +8,6 @@ import (
 	"github.com/bndw/pick/config"
 )
 
-const Version = "v0.5.0"
-
 func main() {
 	cfg, err := config.Load(Version)
 	if err != nil {
