@@ -17,6 +17,9 @@ const (
 	hashLen           = 4 // in bytes
 )
 
+// CopyWithClearing copies the provided text to the system clipboard
+// If clearAfter is given and larger 0, the clipboard is automatically
+// cleared after the duration has passed
 func CopyWithClearing(text string, clearAfter Duration) error {
 	if clearAfter.Seconds() > 0 {
 		// Clear the clipboard after 'clearAfter'
@@ -25,6 +28,8 @@ func CopyWithClearing(text string, clearAfter Duration) error {
 	return otherClipboard.WriteAll(text)
 }
 
+// ClearIfMatch clears the clipboard if its current content's truncated
+// hash equals 'match'
 func ClearIfMatch(match string) error {
 	// We're about to clear the clipboard
 	// Ensure that we still have the expected contents in it
