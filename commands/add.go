@@ -46,7 +46,7 @@ func Add(args []string, flags *pflag.FlagSet) error {
 
 	fmt.Println("Credential added")
 	if utils.Confirm("Copy password to clipboard", true) {
-		if err := clipboard.CopyWithClearing(account.Password, safe.Config.General.Clipboard.ClearAfter); err != nil {
+		if err := clipboard.Copy(account.Password, safe.Config.General.Clipboard.ClearAfter); err != nil {
 			return err
 		}
 		fmt.Println(strings.PasswordCopiedToClipboard)

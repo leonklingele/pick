@@ -17,10 +17,10 @@ const (
 	hashLen           = 4 // in bytes
 )
 
-// CopyWithClearing copies the provided text to the system clipboard
+// Copy copies the provided text to the system clipboard
 // If clearAfter is given and larger 0, the clipboard is automatically
 // cleared after the duration has passed
-func CopyWithClearing(text string, clearAfter Duration) error {
+func Copy(text string, clearAfter Duration) error {
 	if clearAfter.Seconds() > 0 {
 		// Clear the clipboard after 'clearAfter'
 		_ = launchClearer(text, clearAfter)
@@ -42,7 +42,7 @@ func ClearIfMatch(match string) error {
 	if subtle.ConstantTimeCompare([]byte(currentHashed), []byte(match)) != 1 {
 		return errors.New("not clearing clipboard as content has changed")
 	}
-	return CopyWithClearing("", Duration{-1})
+	return Copy("", Duration{-1})
 }
 
 func launchClearer(current string, duration Duration) error {

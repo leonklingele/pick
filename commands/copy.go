@@ -37,7 +37,7 @@ func Copy(args []string, flags *pflag.FlagSet) error {
 		return err
 	}
 
-	if err := clipboard.CopyWithClearing(account.Password, safe.Config.General.Clipboard.ClearAfter); err != nil {
+	if err := clipboard.Copy(account.Password, safe.Config.General.Clipboard.ClearAfter); err != nil {
 		return err
 	}
 	fmt.Println(strings.PasswordCopiedToClipboard)
