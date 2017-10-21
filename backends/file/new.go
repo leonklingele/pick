@@ -10,8 +10,6 @@ import (
 )
 
 func _new(config *backends.Config) (backends.Client, error) {
-	config.Type = ClientName
-
 	homeDir, err := homedir.Dir()
 	if err != nil {
 		return nil, err

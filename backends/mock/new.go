@@ -7,8 +7,6 @@ import (
 )
 
 func _new(config *backends.Config) (backends.Client, error) {
-	config.Type = clientName
-
 	safeData := []byte(`-----BEGIN PGP MESSAGE-----
 
 wx4EBwMI/EyvqWA12cNgJBnoGRxYO1D0/F/w5Ro5uafS4AHkLjgl3wFVjIRB1vbo

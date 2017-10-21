@@ -20,8 +20,6 @@ const (
 //		bucket:	 AWS S3 Bucket name for storing the safe. Defaults to `defaultS3Bucket`
 //		key:	 	 AWS S3 Key name for storing the safe. Defaults to `defaultS3Key`
 func _new(config *backends.Config) (backends.Client, error) {
-	config.Type = ClientName
-
 	// AWS S3 Bucket overrides
 	bucket, ok := config.Settings["bucket"].(string)
 	if !ok {
