@@ -98,7 +98,7 @@ func newS3Backend(t *testing.T, config *backends.Config) *client {
 		tmp := backends.NewDefaultConfig()
 		config = &tmp
 	}
-	c, err := _new(config)
+	c, err := backends.NewWithType(ClientName, config)
 	if err != nil {
 		t.Fatalf("Failed to create S3 backend: %v", err)
 	}
