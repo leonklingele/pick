@@ -25,10 +25,10 @@ func NewForTesting(t *testing.T, config *backends.Config) *client {
 		tmp := backends.NewDefaultConfig()
 		config = &tmp
 	}
-	// c, err := backends.NewWithType(clientName, config)
 	// TODO(leon): This fails for whatever reason:
 	// interface conversion: backends.Client is *mock.client, not *mock.client
-	c, err := _new(config)
+	c, err := backends.NewWithType(clientName, config)
+	// c, err := _new(config)
 	if err != nil {
 		t.Fatalf("Failed to create mock backend: %v", err)
 	}
