@@ -42,3 +42,28 @@ func IsRel(p string) bool {
 	}
 	return false
 }
+
+func TrimModPrefix(p string) string {
+	mods := []string{
+		modCurrent + modSlashNix,
+		modParent + modSlashNix,
+
+		modCurrent + modSlashWin,
+		modParent + modSlashWin,
+
+		modSlashNix,
+		modSlashWin,
+	}
+
+	for {
+		tmp := p
+		for _, m := range mods {
+			tmp = strings.TrimPrefix(tmp, m)
+		}
+		if tmp == p {
+			break
+		}
+		p = tmp
+	}
+	return p
+}

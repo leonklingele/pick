@@ -141,3 +141,69 @@ func TestIsRel(t *testing.T) {
 		}
 	}
 }
+
+func TestTrimModPrefix(t *testing.T) {
+	fixtures := []struct {
+		path    string
+		trimmed string
+	}{
+		{
+			path:    "test",
+			trimmed: "test",
+		},
+		{
+			path:    ".test",
+			trimmed: ".test",
+		},
+		{
+			path:    "$.test",
+			trimmed: ".test",
+		},
+		{
+			path:    "$$",
+			trimmed: "",
+		},
+		{
+			path:    "$$.test",
+			trimmed: ".test",
+		},
+		{
+			path:    ".$",
+			trimmed: "",
+		},
+		{
+			path:    ".$.test",
+			trimmed: ".test",
+		},
+		{
+			path:    "$.$.test",
+			trimmed: ".test",
+		},
+		{
+			path:    "..$",
+			trimmed: "",
+		},
+		{
+			path:    "..$.test",
+			trimmed: ".test",
+		},
+		{
+			path:    "..$$.test",
+			trimmed: ".test",
+		},
+		{
+			path:    "..$$.test",
+			trimmed: ".test",
+		},
+	}
+	for _, m := range modifiers {
+		for i, f := range fixtures {
+			p := strings.Replace(f.path, pathSep, m, -1)
+			got := TrimModPrefix(p)
+			want := strings.Replace(f.trimmed, pathSep, m, -1)
+			if got != want {
+				t.Fatalf("#%d: %s failed the test, got: '%s', want: '%s'", i, f.path, got, want)
+			}
+		}
+	}
+}
