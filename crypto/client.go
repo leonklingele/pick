@@ -15,12 +15,12 @@ type KeyDerivation interface {
 }
 
 func New(config *Config) (Client, error) {
-	switch config.Type {
+	switch t := config.Type; t {
 	default:
-		if config.Type != "" {
-			fmt.Println("Invalid encryption type, using default")
-		}
-		fallthrough
+		config.Type = DefaultConfigType
+		fmt.Printf("Invalid encryption type %q, using default %q\n", t, DefaultConfigType)
+		// This won't recurse indefinitely as we have provided a valid config type above
+		return New(config)
 	case ConfigTypeChaChaPoly:
 		// Remove other settings
 		// TODO(leon): This is shitty.
